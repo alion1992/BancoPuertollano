@@ -63,17 +63,8 @@ class Banco {
     return count;
   }
 }
-var data = localStorage.getItem("cuenta");
-if (data != null) {
-  var c = JSON.parse(data);
-  var cuenta = new Banco(c.iban, c.saldo);
-} else {
-  var cuenta = new Banco("ES21 1465 0100 72 2030876293", 500);
-}
 
-document.getElementById("ibanInfo").value = cuenta.iban;
-document.getElementById("saldoInfo").value = cuenta.saldo;
-
+var cuenta
 const botonRetirar = document.getElementById("saldoRetirar");
 const botonIngresar = document.getElementById("saldoIngresar");
 
@@ -133,3 +124,15 @@ function checkEmpty(checkStr){
   
     return check
   }
+function cargarDatos(){
+    var data = localStorage.getItem("mibanco");
+  if (data != null) {
+    var c = JSON.parse(data);
+    cuenta = new Banco(c.iban, c.saldo);
+  } else {
+    cuenta = new Banco("ES21 1465 0100 72 2030876293", 500);
+  }
+
+document.getElementById("ibanInfo").value = cuenta.iban;
+document.getElementById("saldoInfo").value = cuenta.saldo;
+}
